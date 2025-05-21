@@ -1,0 +1,17 @@
+[
+    {
+        "name": "달걀",
+        "count": 1,
+        "isRefrigerator": true
+    },
+    {
+        "name": "감자",
+        "count": 1,
+        "isRefrigerator": false
+    },
+    {
+        "name": "소고기",
+        "count": 1,
+        "isRefrigerator": true
+    }
+]
