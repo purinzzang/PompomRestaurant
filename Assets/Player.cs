@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     public List<Ingredient> ingredientList = new List<Ingredient>();
     public GameObject myStoragePanel;
 
+    string curType;
+
     private void Awake()
     {
         instance = this;
@@ -36,9 +38,10 @@ public class Player : MonoBehaviour
         {
             other.GetComponent<Storage>().ShowStorage();
         }
-        else if(other.gameObject.tag == "Fry")
+        else if(other.gameObject.tag == "Fry" || other.gameObject.tag == "Boil")
         {
             ShowMyStorage();
+            curType = other.gameObject.tag;
         }
     }
 
@@ -48,7 +51,7 @@ public class Player : MonoBehaviour
         {
             other.GetComponent<Storage>().HideStorage();
         }
-        else if (other.gameObject.tag == "Fry")
+        else if (other.gameObject.tag == "Fry" || other.gameObject.tag == "Boil")
         {
             HideMyStorage();
         }
@@ -77,7 +80,7 @@ public class Player : MonoBehaviour
         myStoragePanel.SetActive(true);
     }
 
-    public void HideMyStorage()
+    void HideMyStorage()
     {
         myStoragePanel.SetActive(false);
         ScrollRect scrollRect = myStoragePanel.GetComponentInChildren<ScrollRect>();
@@ -89,6 +92,6 @@ public class Player : MonoBehaviour
 
     void OnClickIngredientButton(string name, GameObject check)
     {
-        check.SetActive(RecipeManager.instance.CheckRecipe(name));
+        check.SetActive(RecipeManager.instance.CheckRecipe(name, curType));
     }
 }

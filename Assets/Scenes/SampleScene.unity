@@ -473,6 +473,10 @@ MonoBehaviour:
     - "\uC18C\uACE0\uAE30"
     type: Fry
     result: "\uAD6C\uC6B4\uC18C\uACE0\uAE30"
+  - ingredients:
+    - "\uB2EC\uAC40"
+    type: Boil
+    result: "\uC0B6\uC740\uB2EC\uAC40"
   readyList: []
 --- !u!4 &276382985
 Transform:

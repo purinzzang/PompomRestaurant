@@ -21,32 +21,32 @@ public class RecipeManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-    }
-
-    public bool CheckRecipe(string name)
+    public bool CheckRecipe(string name, string type)
     {
         
 
         if (readyList.Contains(name))
         {
             readyList.Remove(name);
-            CheckRecipeBook();
+            CheckRecipeBook(type);
             return false;
         }
         else
         {
             readyList.Add(name);
-            CheckRecipeBook();
+            CheckRecipeBook(type);
             return true;
         }
     }
 
-    void CheckRecipeBook()
+    void CheckRecipeBook(string type)
     {
         for (int i = 0; i < recipeBook.Count; i++)
         {
+            if(type != recipeBook[i].type)
+            {
+                continue;
+            }
             for (int j = 0; j < recipeBook[i].ingredients.Length; j++)
             {
                 if (!readyList.Contains(recipeBook[i].ingredients[j]))
