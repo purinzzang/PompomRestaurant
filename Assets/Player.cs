@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public static Player instance;
     public List<Ingredient> ingredientList = new List<Ingredient>();
     public GameObject myStoragePanel;
+    public ScrollRect scroll1, scroll2;
 
     string curType;
 
@@ -59,15 +60,15 @@ public class Player : MonoBehaviour
 
     void ShowMyStorage()
     {
-        ScrollRect scrollRect = myStoragePanel.GetComponentInChildren<ScrollRect>();
-        if (scrollRect.content.transform.childCount > 1)
+        RecipeManager.instance.ClearReadyList();
+        if (scroll1.content.transform.childCount > 1)
         {
-            for (int i = 1; i < scrollRect.content.transform.childCount; i++)
+            for (int i = 1; i < scroll1.content.transform.childCount; i++)
             {
-                Destroy(scrollRect.content.transform.GetChild(i).gameObject);
+                Destroy(scroll1.content.transform.GetChild(i).gameObject);
             }
         }
-        GameObject button = scrollRect.content.transform.GetChild(0).gameObject;
+        GameObject button = scroll1.content.transform.GetChild(0).gameObject;
         for (int i = 0; i < ingredientList.Count; i++)
         {
             GameObject newButton = Instantiate(button, button.transform.parent);
@@ -83,11 +84,12 @@ public class Player : MonoBehaviour
     void HideMyStorage()
     {
         myStoragePanel.SetActive(false);
-        ScrollRect scrollRect = myStoragePanel.GetComponentInChildren<ScrollRect>();
-        for (int i = 1; i < scrollRect.content.transform.childCount; i++)
+        
+        for (int i = 1; i < scroll1.content.transform.childCount; i++)
         {
-            Destroy(scrollRect.content.transform.GetChild(i).gameObject);
+            Destroy(scroll1.content.transform.GetChild(i).gameObject);
         }
+        RecipeManager.instance.ClearReadyList();
     }
 
     void OnClickIngredientButton(string name, GameObject check)

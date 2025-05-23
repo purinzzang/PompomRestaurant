@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class Recipe
@@ -23,8 +25,6 @@ public class RecipeManager : MonoBehaviour
 
     public bool CheckRecipe(string name, string type)
     {
-        
-
         if (readyList.Contains(name))
         {
             readyList.Remove(name);
@@ -41,6 +41,19 @@ public class RecipeManager : MonoBehaviour
 
     void CheckRecipeBook(string type)
     {
+        ScrollRect scrollRect = Player.instance.scroll2;
+        if (scrollRect.content.childCount > 1)
+        {
+            for (int i = 1; i < scrollRect.content.childCount; i++)
+            {
+                Destroy(scrollRect.content.GetChild(i).gameObject);
+            }
+        }
+        if (scrollRect.gameObject.activeInHierarchy)
+        {
+            scrollRect.gameObject.SetActive(false);
+        }
+
         for (int i = 0; i < recipeBook.Count; i++)
         {
             if(type != recipeBook[i].type)
@@ -55,10 +68,33 @@ public class RecipeManager : MonoBehaviour
                 }
                 if (j == recipeBook[i].ingredients.Length - 1)
                 {
-                    Debug.Log(recipeBook[i].result);
+                    ShowAvailableRecipe(recipeBook[i].result);
                 }
             }
 
+        }
+    }
+
+    void ShowAvailableRecipe(string result)
+    {
+        ScrollRect scrollRect = Player.instance.scroll2;
+
+        GameObject newButton = Instantiate(scrollRect.content.GetChild(0), scrollRect.content).gameObject;
+        newButton.GetComponentInChildren<TextMeshProUGUI>().text = result;
+        newButton.SetActive(true);
+
+        if (!scrollRect.gameObject.activeInHierarchy)
+        {
+            scrollRect.gameObject.SetActive(true);
+        }
+    }
+
+
+    public void ClearReadyList()
+    {
+        if (readyList.Count > 0)
+        {
+            readyList.Clear();
         }
     }
 }
