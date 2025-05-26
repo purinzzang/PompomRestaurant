@@ -6,7 +6,10 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public static Player instance;
+
+    // 들고있는 재료 리스트 
     public List<Ingredient> ingredientList = new List<Ingredient>();
+
     public GameObject myStoragePanel;
     public ScrollRect scroll1, scroll2;
 
@@ -17,6 +20,7 @@ public class Player : MonoBehaviour
         instance = this;
     }
 
+    // 선택한 재료 얻기 
     public void GetIngredient(string name)
     {
         int index = ingredientList.FindIndex(x => x.name == name);
@@ -30,6 +34,29 @@ public class Player : MonoBehaviour
             newIngredient.name = name;
             newIngredient.count = 1;
             ingredientList.Add(newIngredient);
+        }
+    }
+
+    // 재료 사용하기 
+    public void UseIngredients(string[] ingredients)
+    {
+        HideMyStorage();
+
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+            int index = ingredientList.FindIndex(x => x.name == ingredients[i]);
+            if (index == -1)
+            {
+                continue;
+            }
+            else
+            {
+                ingredientList[index].count--;
+                if (ingredientList[index].count <= 0)
+                {
+                    ingredientList.RemoveAt(index);
+                }
+            }
         }
     }
 
@@ -58,6 +85,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // 재료 선택창 표시 
     void ShowMyStorage()
     {
         RecipeManager.instance.ClearReadyList();
@@ -81,6 +109,7 @@ public class Player : MonoBehaviour
         myStoragePanel.SetActive(true);
     }
 
+    // 재료 선택창 숨기기 
     void HideMyStorage()
     {
         myStoragePanel.SetActive(false);
@@ -90,8 +119,15 @@ public class Player : MonoBehaviour
             Destroy(scroll1.content.transform.GetChild(i).gameObject);
         }
         RecipeManager.instance.ClearReadyList();
+
+        for (int i = 1; i < scroll2.content.transform.childCount; i++)
+        {
+            Destroy(scroll2.content.transform.GetChild(i).gameObject);
+        }
+        scroll2.gameObject.SetActive(false);
     }
 
+    // 재료 선택 버튼 클릭 
     void OnClickIngredientButton(string name, GameObject check)
     {
         check.SetActive(RecipeManager.instance.CheckRecipe(name, curType));

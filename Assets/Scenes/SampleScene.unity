@@ -555,18 +555,22 @@ MonoBehaviour:
     - "\uB2EC\uAC40"
     type: Fry
     result: "\uB2EC\uAC40\uD504\uB77C\uC774"
+    time: 5
   - ingredients:
     - "\uAC10\uC790"
     type: Fry
     result: "\uAD6C\uC6B4\uAC10\uC790"
+    time: 7
   - ingredients:
     - "\uC18C\uACE0\uAE30"
     type: Fry
     result: "\uAD6C\uC6B4\uC18C\uACE0\uAE30"
+    time: 10
   - ingredients:
     - "\uB2EC\uAC40"
     type: Boil
     result: "\uC0B6\uC740\uB2EC\uAC40"
+    time: 5
   readyList: []
 --- !u!4 &276382985
 Transform:
@@ -2335,7 +2339,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1016953915}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999875
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2722,7 +2726,7 @@ RectTransform:
   m_Father: {fileID: 1825430681}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.9999875}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2914,7 +2918,7 @@ MonoBehaviour:
   m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8ed15ae01eb84a92b6eb693f40a836c, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 5711321927044947810, guid: c8ed15ae01eb84a92b6eb693f40a836c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2979,7 +2983,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1101987825
